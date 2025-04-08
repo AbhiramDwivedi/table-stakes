@@ -1,0 +1,87 @@
+/* Screenshot mockup for README */
+import React from "react";
+
+export default function ScreenshotMockup() {
+  return (
+    <svg
+      width="1200"
+      height="630"
+      viewBox="0 0 1200 630"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Background */}
+      <rect width="1200" height="630" fill="#F8FAFC" />
+      
+      {/* App Header */}
+      <rect y="0" width="1200" height="60" fill="#F1F5F9" />
+      <rect x="20" y="15" width="30" height="30" rx="4" fill="#3B82F6" />
+      <text x="60" y="35" fontFamily="Arial" fontSize="18" fontWeight="600" fill="#1E293B">Table Stakes</text>
+      
+      {/* Query Input Area */}
+      <rect x="20" y="80" width="1160" height="160" rx="8" fill="white" stroke="#E2E8F0" />
+      <text x="30" y="100" fontFamily="Arial" fontSize="16" fontWeight="500" fill="#475569">Ask your data question in plain English:</text>
+      <rect x="30" y="115" width="1140" height="80" rx="4" fill="#F8FAFC" stroke="#CBD5E1" />
+      <text x="40" y="145" fontFamily="Arial" fontSize="14" fill="#94A3B8">Show me sales by region for the last quarter</text>
+      <rect x="1050" y="205" width="120" height="35" rx="4" fill="#3B82F6" />
+      <text x="1085" y="227" fontFamily="Arial" fontSize="14" fontWeight="500" fill="white" textAnchor="middle">Run Query</text>
+      
+      {/* Sample Queries */}
+      <text x="30" y="280" fontFamily="Arial" fontSize="16" fontWeight="500" fill="#475569">Need ideas? Try clicking one:</text>
+      <rect x="30" y="295" width="220" height="30" rx="15" fill="white" stroke="#CBD5E1" />
+      <text x="140" y="315" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">find all new enrollments last week</text>
+      <rect x="260" y="295" width="240" height="30" rx="15" fill="white" stroke="#CBD5E1" />
+      <text x="380" y="315" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">show enrollments by course</text>
+      <rect x="510" y="295" width="180" height="30" rx="15" fill="white" stroke="#CBD5E1" />
+      <text x="600" y="315" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">what was total revenue?</text>
+      
+      {/* Results Area - Chart */}
+      <rect x="20" y="345" width="1160" height="460" rx="8" fill="white" stroke="#E2E8F0" />
+      <text x="40" y="375" fontFamily="Arial" fontSize="16" fontWeight="600" fill="#1E293B">Sales by Region (Q1 2025)</text>
+      <text x="40" y="395" fontFamily="Arial" fontSize="12" fill="#64748B">Quarterly sales data across different regions</text>
+      
+      {/* Chart Tabs */}
+      <rect x="40" y="415" width="200" height="30" rx="4" fill="#F1F5F9" />
+      <rect x="40" y="415" width="70" height="30" rx="4" fill="#3B82F6" />
+      <text x="75" y="435" fontFamily="Arial" fontSize="12" fontWeight="500" fill="white" textAnchor="middle">Chart</text>
+      <text x="125" y="435" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">Insights</text>
+      <text x="185" y="435" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">Data</text>
+      
+      {/* Bar Chart */}
+      <rect x="40" y="455" width="1120" height="330" rx="4" fill="#FFFFFF" />
+      <line x1="90" y1="705" x2="1090" y2="705" stroke="#E2E8F0" />
+      <line x1="90" y1="455" x2="90" y2="705" stroke="#E2E8F0" />
+      
+      {/* Chart Bars */}
+      <rect x="150" y="540" width="80" height="165" fill="#3B82F6" rx="4" />
+      <text x="190" y="720" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">North</text>
+      
+      <rect x="350" y="490" width="80" height="215" fill="#3B82F6" rx="4" />
+      <text x="390" y="720" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">South</text>
+      
+      <rect x="550" y="600" width="80" height="105" fill="#3B82F6" rx="4" />
+      <text x="590" y="720" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">East</text>
+      
+      <rect x="750" y="520" width="80" height="185" fill="#3B82F6" rx="4" />
+      <text x="790" y="720" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">West</text>
+      
+      <rect x="950" y="570" width="80" height="135" fill="#3B82F6" rx="4" />
+      <text x="990" y="720" fontFamily="Arial" fontSize="12" fill="#64748B" textAnchor="middle">Central</text>
+      
+      {/* Y-axis labels */}
+      <text x="75" y="705" fontFamily="Arial" fontSize="10" fill="#94A3B8" textAnchor="end">0</text>
+      <text x="75" y="655" fontFamily="Arial" fontSize="10" fill="#94A3B8" textAnchor="end">100K</text>
+      <text x="75" y="605" fontFamily="Arial" fontSize="10" fill="#94A3B8" textAnchor="end">200K</text>
+      <text x="75" y="555" fontFamily="Arial" fontSize="10" fill="#94A3B8" textAnchor="end">300K</text>
+      <text x="75" y="505" fontFamily="Arial" fontSize="10" fill="#94A3B8" textAnchor="end">400K</text>
+      <text x="75" y="455" fontFamily="Arial" fontSize="10" fill="#94A3B8" textAnchor="end">500K</text>
+      
+      {/* Horizontal grid lines */}
+      <line x1="90" y1="655" x2="1090" y2="655" stroke="#E2E8F0" strokeDasharray="5,5" />
+      <line x1="90" y1="605" x2="1090" y2="605" stroke="#E2E8F0" strokeDasharray="5,5" />
+      <line x1="90" y1="555" x2="1090" y2="555" stroke="#E2E8F0" strokeDasharray="5,5" />
+      <line x1="90" y1="505" x2="1090" y2="505" stroke="#E2E8F0" strokeDasharray="5,5" />
+      <line x1="90" y1="455" x2="1090" y2="455" stroke="#E2E8F0" strokeDasharray="5,5" />
+    </svg>
+  );
+}
