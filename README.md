@@ -22,7 +22,7 @@ Table Stakes is an AI-powered natural language to SQL query tool that allows use
 ### Prerequisites
 
 - Node.js 16.x or higher
-- PostgreSQL database
+- Any SQL database (PostgreSQL, MySQL, etc.) - the application works with any database schema
 - OpenAI API key
 
 ### Installation
@@ -40,25 +40,32 @@ cd table-stakes
 pnpm install
 ```
 
-3. Create a `.env.local` file in the root directory:
+3. Set up your environment variables:
+   
+   The repository includes an `.env.example` file that you can use as a template. Copy it to create your own `.env.local` file:
 
-```env
-# PostgreSQL
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=yourpassword
-POSTGRES_DB=tablestakes
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-
-# OpenAI
-OPENAI_API_KEY=your_openai_api_key
+```bash
+cp .env.example .env.local
 ```
 
-4. Run the database setup script:
+Then edit the `.env.local` file to add your specific configuration:
+
+```env
+# Database connection (replace with your database details)
+DATABASE_URL=postgresql://username:password@localhost:5432/database_name
+DATABASE_TYPE=postgresql
+
+# OpenAI API key
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+4. (Optional) Run the database setup script:
 
 ```bash
 node setup-database.js
 ```
+
+This step is optional and only necessary if you want to set up a sample database with example data. Table Stakes is designed to work with any existing database schema.
 
 5. Start the development server:
 
@@ -109,11 +116,13 @@ The application follows this high-level flow:
 
 ## Customizing for Your Data
 
-To use Table Stakes with your own database schema:
+Table Stakes is designed to work with any database schema without modifications. The application dynamically adapts to your database structure when you connect to it.
 
-1. Modify the database configuration in `lib/database/postgresql.ts`
-2. Update the database schema representation in `lib/database/interface.ts`
-3. Adjust the schema information in the prompts in `lib/openai.ts`
+However, you can optimize the experience by:
+
+1. Ensuring your database connection is properly configured in your `.env.local` file
+2. Reviewing and adjusting the database interface in `lib/database/interface.ts` if needed
+3. Optionally customizing the prompts in `lib/openai.ts` to better describe your specific data model
 
 ## Contributing
 
