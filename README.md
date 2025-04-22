@@ -1,9 +1,12 @@
 # Table Stakes
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-Unlicense-blue.svg)
 ![Version](https://img.shields.io/badge/version-1.0.0-green.svg)
+![Status](https://img.shields.io/badge/status-development-orange.svg)
 
 Table Stakes is an AI-powered natural language to SQL query tool that allows users to interact with databases using plain English. Ask questions about your data and get instant visualizations and insights without writing a single line of SQL.
+
+> **⚠️ IMPORTANT DISCLOSURE**: This code is currently under active development and requires further security and performance review. While suitable for internal use and testing purposes, it should NOT be deployed for external production endpoints or used with sensitive data until a complete security audit has been performed.
 
 ![Table Stakes Screenshot](public/screenshot.svg)
 
@@ -242,7 +245,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is released under the Unlicense - placing it in the public domain with no copyright restrictions. This means you can use, modify, and distribute the code freely without any attribution requirements. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
