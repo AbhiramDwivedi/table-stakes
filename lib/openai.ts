@@ -27,15 +27,6 @@ export async function generateSQLFromNaturalLanguage(query: string, schema: Data
   // Format the schema information for the prompt
   const schemaInfo = formatSchemaForPrompt(schema)
   
-  // Handle enrollment queries specifically
-  if (query.toLowerCase().includes("enrollment") && 
-      (query.toLowerCase().includes("week") || 
-       query.toLowerCase().includes("month") || 
-       query.toLowerCase().includes("quarter"))) {
-    console.log("Detected enrollment query with time reference")
-    return handleEnrollmentQuery(query)
-  }
-  
   // Get current date for temporal queries
   const currentDate = new Date()
   const formattedCurrentDate = currentDate.toISOString().split('T')[0]
@@ -57,6 +48,11 @@ export async function generateSQLFromNaturalLanguage(query: string, schema: Data
     4. For "last month" use date BETWEEN date_trunc('month', current_date - interval '1 month') AND date_trunc('month', current_date) - interval '1 day'
     5. For "last quarter" use date >= date_trunc('quarter', current_date - interval '3 months') AND date < date_trunc('quarter', current_date)
     6. For "last year" use date >= date_trunc('year', current_date - interval '1 year') AND date < date_trunc('year', current_date)
+    7. For "week by week" group results by week using date_trunc('week', date_column)
+    8. For "month by month" group results by month using date_trunc('month', date_column)
+    
+    Look at the database schema carefully to identify the appropriate date columns to use for time-based filtering.
+    If multiple date columns exist, use contextual clues from the query to determine which one to use.
     
     Return only the SQL query without any explanation or markdown formatting.
   `
@@ -87,63 +83,6 @@ export async function generateSQLFromNaturalLanguage(query: string, schema: Data
     console.error("Error generating SQL:", error)
     throw new Error(`OpenAI API error: ${error instanceof Error ? error.message : String(error)}`)
   }
-}
-
-/**
- * Handle enrollment queries specifically to ensure correct date handling
- */
-function handleEnrollmentQuery(query: string): string {
-  console.log("Using specialized enrollment query handler")
-  
-  // Calculate dates for different time periods
-  const today = new Date()
-  
-  // Last week
-  const lastWeek = new Date(today)
-  lastWeek.setDate(today.getDate() - 7)
-  const formattedLastWeek = lastWeek.toISOString().split('T')[0]
-  
-  // Last month
-  const lastMonth = new Date(today)
-  lastMonth.setMonth(today.getMonth() - 1)
-  const formattedLastMonth = lastMonth.toISOString().split('T')[0]
-  
-  // Last quarter (3 months ago)
-  const lastQuarter = new Date(today)
-  lastQuarter.setMonth(today.getMonth() - 3)
-  const formattedLastQuarter = lastQuarter.toISOString().split('T')[0]
-  
-  // Format current date
-  const formattedToday = today.toISOString().split('T')[0]
-  
-  // Determine time period from query
-  let startDate = formattedLastWeek
-  let timeDescription = "in the last week"
-  
-  if (query.toLowerCase().includes("month")) {
-    startDate = formattedLastMonth
-    timeDescription = "in the last month"
-  } else if (query.toLowerCase().includes("quarter")) {
-    startDate = formattedLastQuarter
-    timeDescription = "in the last quarter"
-  }
-  
-  console.log(`Time period detected: ${timeDescription} (${startDate} to ${formattedToday})`)
-  
-  // Extract relevant parts from the query
-  const isActive = query.toLowerCase().includes("active") ? "AND status = 'active'" : ""
-  
-  // Create appropriate SQL
-  const sql = `
-    SELECT * FROM enrollments 
-    WHERE enrollment_date >= '${startDate}' 
-    AND enrollment_date <= '${formattedToday}'
-    ${isActive}
-    ORDER BY enrollment_date DESC
-  `.trim()
-  
-  console.log(`Enrollment query handler generated SQL: ${sql}`)
-  return sql
 }
 
 /**
