@@ -25,3 +25,31 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# testing
+/coverage
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Setup files - only needed for initial setup
+setup-database.js
+setup-package.json
+
+# Local database files
+*.sqlite
+*.db
+
+# Logs
+logs/
+*.log
+
+# Generated files
+/reports

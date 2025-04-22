@@ -67,10 +67,32 @@ export async function processQuery(request: QueryRequest): Promise<QueryResponse
     }
   } catch (error) {
     console.error("Error in processQuery:", error)
+    
+    // Sanitize error messages to prevent leaking sensitive information
+    let errorMessage = "Database query failed";
+    
+    // For specific error types, provide more helpful but still safe messages
+    // without leaking connection details, usernames, passwords, etc.
+    const errorStr = String(error).toLowerCase();
+    if (errorStr.includes("syntax error")) {
+      errorMessage = "SQL syntax error";
+    } else if (errorStr.includes("permission denied") || errorStr.includes("authentication failed")) {
+      errorMessage = "Database access error";
+    } else if (errorStr.includes("timeout")) {
+      errorMessage = "Database query timeout";
+    } else if (errorStr.includes("relation") && errorStr.includes("does not exist")) {
+      errorMessage = "Requested table does not exist";
+    } else if (errorStr.includes("column") && errorStr.includes("does not exist")) {
+      errorMessage = "Requested column does not exist";
+    }
+    
+    // Log original error for debugging but never expose to user
+    console.log(`Original error (not exposed to user): ${error instanceof Error ? error.message : String(error)}`);
+    
     return {
       resultType: "table",
       data: {},
-      message: error instanceof Error ? error.message : String(error),
+      message: errorMessage,
       debug: {
         executedQuery: "Error executing query",
         rowCount: 0

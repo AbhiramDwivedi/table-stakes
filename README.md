@@ -94,6 +94,112 @@ Here are some example queries you can try:
 - "Create a chart of enrollments by course"
 - "Compare sales by store location"
 
+## Testing
+
+### Unit Tests
+
+Table Stakes uses Jest and React Testing Library for unit testing. Tests cover individual components, utility functions, and integration between components.
+
+To run unit tests:
+
+```bash
+pnpm test
+```
+
+To run tests with coverage report:
+
+```bash
+pnpm test:coverage
+```
+
+Key test areas include:
+
+- **Component Tests**: Ensure UI components render correctly and respond to user interactions
+- **API Tests**: Verify API routes function correctly with mock data
+- **Utility Function Tests**: Validate helper functions, data formatting, and business logic
+- **Hook Tests**: Test custom hooks for proper state management and side effects
+
+### Integration Tests
+
+Integration tests verify that various parts of the application work together correctly:
+
+```bash
+pnpm test:integration
+```
+
+These tests focus on:
+
+- Query processing flow from natural language to SQL
+- Database connection and query execution
+- Visualization generation from query results
+- User interactions across multiple components
+
+### End-to-End Tests
+
+End-to-end tests use Playwright to simulate real user workflows:
+
+```bash
+pnpm test:e2e
+```
+
+These tests validate complete user journeys such as:
+- Connecting to a database
+- Submitting natural language queries
+- Receiving and interacting with results
+- Exporting data and visualizations
+
+### Security Testing
+
+#### OWASP Top 10 Scanning
+
+Table Stakes implements security testing to identify potential vulnerabilities, focusing on the OWASP Top 10:
+
+```bash
+pnpm security:scan
+```
+
+This runs automated security scanning using tools like:
+- OWASP ZAP (Zed Attack Proxy) for dynamic application security testing
+- Snyk for dependency vulnerability scanning
+- ESLint security plugins for static code analysis
+
+#### Key Security Areas Tested:
+
+1. **Injection Vulnerabilities**: SQL injection prevention in the query processor
+2. **Broken Authentication**: API route protection and authentication flow testing
+3. **Sensitive Data Exposure**: Proper handling of database credentials and API keys
+4. **XML External Entities (XXE)**: Input validation and sanitization
+5. **Broken Access Control**: Authorization checks and permission validation
+6. **Security Misconfiguration**: Environment setup and server configuration validation
+7. **Cross-Site Scripting (XSS)**: Input/output encoding and Content Security Policy testing
+8. **Insecure Deserialization**: Safe data handling and processing
+9. **Using Components with Known Vulnerabilities**: Dependency scanning and updates
+10. **Insufficient Logging & Monitoring**: Audit logging for security-relevant events
+
+### Performance Testing
+
+Performance tests ensure the application remains responsive under load:
+
+```bash
+pnpm test:performance
+```
+
+These tests measure:
+- Response times for natural language query processing
+- Database query execution time
+- Visualization rendering performance
+- Application behavior under concurrent user load
+
+### Accessibility Testing
+
+Accessibility tests verify the application meets WCAG guidelines:
+
+```bash
+pnpm test:a11y
+```
+
+This runs automated accessibility checks using tools like axe-core and pa11y.
+
 ## Technical Architecture
 
 Table Stakes is built using a modern tech stack:

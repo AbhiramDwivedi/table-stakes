@@ -1,14 +1,24 @@
+// Add OpenAI Node.js shim for testing environments
+import 'openai/shims/node';
+
 import OpenAI from "openai"
 import type { DatabaseSchema, QueryResult } from "./database/interface"
 import type { GraphResult } from "./result-formatter"
+import { getApiKey, getEnvVariable } from "./utils/env-validator"
 
-// Initialize OpenAI client
+// Initialize OpenAI client with secure API key handling
+const isTestEnvironment = process.env.NODE_ENV === 'test';
+const apiKey = isTestEnvironment 
+  ? 'test-api-key-for-jest-tests' 
+  : getApiKey('OPENAI_API_KEY'); // Uses our secure method
+
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+  apiKey,
+  dangerouslyAllowBrowser: isTestEnvironment, // Allow in test environment which uses jsdom
+});
 
 // Default model to use for OpenAI requests
-const DEFAULT_MODEL = "gpt-4o-mini"
+const DEFAULT_MODEL = getEnvVariable('OPENAI_MODEL', 'gpt-4o-mini')
 
 /**
  * Convert a natural language query to SQL using OpenAI
